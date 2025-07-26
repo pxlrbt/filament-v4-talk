@@ -1,0 +1,20 @@
+{
+  "name": "-filament-talk",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build": "slidev build",
+    "dev": "slidev --open",
+    "export": "slidev export"
+  },
+  "dependencies": {
+    "@iconify-json/lucide": "^1.2.57",
+    "@slidev/cli": "^52.0.0",
+    "@slidev/theme-default": "latest",
+    "@slidev/theme-seriph": "latest",
+    "vue": "^3.5.17"
+  },
+  "devDependencies": {
+    "@unocss/preset-wind3": "^66.3.3"
+  }
+}
