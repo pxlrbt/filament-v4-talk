@@ -15,14 +15,16 @@ layout: intro
 ---
 
 # Preparation
+- ⚠️ TEST: Do Examples work?
 - 💧 Prepare some water
 - 🧘🏼 Focus: Do not disturb
-- 🕵🏼 Arc Private Windows (No 1PW extension)
-- 📈 Start presentation & slide mode
-- 💻 Make both full screen
+- 🕵🏼 Arc: Filament Talk Space
+- 📈 Start presentation & <em>Screen Mirror Mode & Whole Window</em>
+- 💻 Make both full screen (Toggle with F)
 - 👨🏼‍💻 Open Demo Code in PhpStorm
 
 ---
+
 
 ---
 layout: statement
@@ -30,23 +32,22 @@ class: text-center
 ---
 
 # 🚀<br>What's new in<br><em>Filament v4</em>
-What ~~we were~~ Dan was cooking lately
 
-<style>
- em {
-  color: rgba(252.64, 177.18, 80.969)
-}
-</style>
+<!--
+Today I'm talking about all the great stuff you can expect with Filament v4.
+
+Try to demonstrate that with code samples and demos.
+-->
 
 ---
 layout: intro
 ---
 
-# Dennis Koch
+# <strong>Dennis Koch</strong>
 
 <div class="leading-8 mb-6">
-  💼 Freelance Full-Stack Developer<br>
   📍 Freiburg, Germany<br>
+  💼 Freelance Full-Stack Developer<br>
   👨🏼‍💻 Filament Core Team Member<br>
 </div>
 
@@ -63,12 +64,14 @@ layout: intro
 
 <img src="./assets/me.jpg" class="absolute size-64 top-16 right-16   rounded-3xl" />
 
-
-
 <!--
-- Thanks for meetup asylum
-- Filament: Some plugins, mostly support on Discord
-- pxlrbt => not so smart vowel-dropped version of "pixelarbeit"
+## Me
+- Still quite new here.
+- Freiburg across the border – Thanks for meetup asylum
+- Filament: Mostly support on Discord
+
+## Social
+- pxlrbt: No so smart short version of German company name
 - Learned from that => Real name on mastodon
 -->
 
@@ -79,18 +82,13 @@ layout: intro
 <div class="grid grid-cols-2 items-center">
 <div>
 
-# Fila…what?
-
-<v-clicks>
+# <b><em>Fila</em>…what?</b>
 
 - Started as a classic admin panel
 - Free and open source
 - Based on Livewire
 - Today: Full-blown app builder
 - Server-Driven UI (SDUI) framework
-- Team of 10 and solid founding via GitHub
-
-</v-clicks>
 
 </div>
 <div>
@@ -115,22 +113,24 @@ public static function table(Table $table): Table
 </div>
 
 <!--
-We had 1 or 2 Filament talks already:
-- Stefan gave a talk 3 months ago.
-- Christoph & Luc: 8 months ago.
-Anyone doesn't know what Filament is?
-Anyone that hasn't used Filament yet?
+# 💧
+## Intro
+- We had 1 or 2 Filament talks already
+- Anyone doesn't know what Filament is?
+- Anyone that hasn't used Filament yet?
+- Let's just pretend
 
-Let's just pretend
-
-Recap
+## Recap
 -  Livewire is what makes it great and flexible
 -  SDUI: Isn't that what PHP is? Maybe call it Server-configured UI
--
 
-- Team
-  - Dan: Mostly Coding
-  - Rest: Support & Help, Administration, Design, Marketing
+## Team
+- Dan: Mostly Coding
+- Rest: Support & Help, Administration, Design, Marketing
+
+## Recent Talks
+- Stefan gave a talk 3 months ago.
+- Christoph & Luc: 8 months ago.
 -->
 
 ---
@@ -139,11 +139,12 @@ layout: section
 
 # 👀<br>Overview
 
-Performance | DX | New Features
+Performance | DX | New Components
 
 <!--
-- 3 Categories: Performance | DX | New Features
-- This time no new Livewire version, let's see how long this lasts. Tonight Laracon.
+- Tried to categorise
+
+This time no new Livewire version, let's see how long this lasts. Tonight Laracon.
 -->
 
 ---
@@ -155,10 +156,14 @@ layout: section
 Rendering | Partials | JS Methods
 
 <!--
-- Based on Livewire => We trade a bit of performance for DX
-- Performance wasn't thaat bad, but way worse compared to simple Livewire apps and Frontend Frameworks
-- Optimizations
-- & New stuff to help devs to make stuff more performant
+## Livewire
+- Based on Livewire
+- We trade a bit of performance for DX
+
+## Old State
+- Performance wasn't that bad
+- But bad compared to simple Livewire apps and Frontend Frameworks
+- Especially big tables and forms
 -->
 
 ---
@@ -213,17 +218,22 @@ public function toEmbeddedHtml(): string
 - Always thought size of HTML was biggest issue.
 
 [click]
+## TW
 - Replace inline TW with `fi-` classes
 - Use Tailwinds `@apply`
 - Use Tailwinds CSS Vars
 
 [click]
-- Blade components actually were the biggest bottleneck.
-- Before: Heavily used Blade components
+## Blade
+- Heavily use Blade components
+- Components were the biggest bottleneck.
 - Now: Render via PHP
-- 100 rows table with 7 columns
-  - Before 3872 views
-  - After 122 views
+
+## Compare
+100 rows table with 7 columns
+
+- Before 3872 views
+- After 122 views
 
 [click]
 - `view()` takes about 20x longer to render than plain PHP
@@ -260,8 +270,8 @@ em {
 </style>
 
 <!--
-Big improvements all over the board.
-Most notable for larger datasets.
+- Big improvements all over the board.
+- The bigger the better
 -->
 ---
 
@@ -352,8 +362,27 @@ Livewire gives us **flexibility** — but also **limits performance**.
       text-anchor: middle;
     }
 </style>
-<!--
 
+<!--
+# 💧
+
+[click]
+## One Component
+- Whole Page (containing Table/Form)
+- Performance gets worse the bigger it gets
+
+## Separate components
+- Communication between needed
+- More complexity
+
+[click:4]
+## Solution: Partials
+- Render single components/views
+- Reduce transferred HTML size
+- Morph DOM
+
+[click]
+## How it works
 - `afterStateUpdated()` => Which components to render?
 - Register Partial Rendering for component (Partials are extracted into single views)
 - Mark request as `skipRender` so Livewire doesn't do a full render
@@ -367,22 +396,21 @@ Livewire gives us **flexibility** — but also **limits performance**.
   - Tables Filter Form
   - Every Form/Infolist component
 
-Improvements
+## Improvements
 - Less Rendering
 - Less HTML passed over the wire
 - Less morphing
 
-Files:
+## Files
 - HasState::callAfterStateUpdated()
 - PartialsComponentHook (Livewire uses "Hooks" for all Features)
 
-Livewire Payload:
+## Livewire Payload:
 - memo: Used to create the component
 - state: Stores the current state
 - calls: Methods to call with their params
 - updates: Which properties to update
 -->
-
 
 ---
 
@@ -425,6 +453,8 @@ Forms\Components\TextInput::make('password')
 </Docs>
 
 <!--
+# 💧
+
 - Maybe your password rules are more complex – I hope they are not
 -->
 
@@ -573,7 +603,7 @@ Preventing the Livewire component from rendering after a field is updated
 Forms\Components\TextInput::make('name')
   ->maxLength(20)
   ->hint(JsContent::make(<<<'JS'
-      ($get('name')?.length ?? 0) + '/20'
+      ($state?.length ?? 0) + '/20'
   JS)),
 ```
 
@@ -727,6 +757,10 @@ layout: section
 
 Unified Actions | Schemas | Static Tables
 
+<!--
+# 💧
+-->
+
 ---
 
 # 👨🏼‍💻 Unified Actions
@@ -810,39 +844,39 @@ public function form(Schema $schema): Schema
 </Docs>
 
 <!--
-- Forms and Infolists were combined
-- You can use combine form fields and infolists components
+- Started with Tables & Forms
+- v3: Infolists
+- v4: Combined => Schemas
 - Placeholder/View not needed that much anymore
-
-TODO: Example mixed Schema and screenshot
 -->
 
 ---
 layout: full
 ---
+
 # 👨🏼‍💻 Page Schemas
 
-Mix and match the whole page
+Mix and match the whole page.
 
 <div style="width: 28rem;">
 
 <div v-show="$clicks == 1">
 
-```php{3}
-Tabs::make('Tabs')->tabs([
-    Tabs\Tab::make('String')->components([
+```php
+public function content(Schema $schema) {
+    return $schema->components([
         'Some simple content'
-    ]),
-])
+    ]);
+}
 ```
 
 </div>
 
 <div v-show="$clicks == 2">
 
-```php{3-9}
-Tabs::make('Tabs')->tabs([
-    Tabs\Tab::make('HTML')->components([
+```php
+public function content(Schema $schema) {
+    return $schema->components([
         new HtmlString(<<<HTML
           <h1 style="font-size: 2rem">
             An HTML String
@@ -850,54 +884,55 @@ Tabs::make('Tabs')->tabs([
         HTML),
 
         svg('heroicon-c-rocket-launch')
-    ]),
-])
+    ]);
+}
 ```
 
 </div>
 
 <div v-show="$clicks == 3">
 
-```php{3}
-Tabs::make('Tabs')->tabs([
-    Tabs\Tab::make('View')->components([
+```php
+public function content(Schema $schema) {
+    return $schema->components([
         view('laravel')
-    ]),
-])
+    ]);
+}
 ```
 
 </div>
-
 <div v-show="$clicks == 4">
 
-```php{3-6}
-Tabs::make('Tabs')->tabs([
-    Tabs\Tab::make('Form')->components([
+```php
+public function content(Schema $schema) {
+    return $schema->components([
+        Livewire::make(DemoComponent::class),
+    ]);
+}
+```
+</div>
+
+<div v-show="$clicks == 5">
+
+```php
+public function content(Schema $schema) {
+    return $schema->components([
+        EmbeddedTable::make()
+    ]);
+}
+```
+</div>
+
+<div v-show="$clicks == 6">
+
+```php
+public function content(Schema $schema) {
+    return $schema->components([
         Form::make()->schema([
             Forms\Components\TextInput::make('name')
         ])
-    ]),
-])
-```
-</div>
-<div v-show="$clicks == 5">
-
-```php{3}
-Tabs::make('Tabs')->tabs([
-    Tabs\Tab::make('Table')->components([
-        EmbeddedTable::make()
-    ]),
-])
-```
-</div>
-<div v-show="$clicks == 6">
-
-```php{3-6}
-Tabs::make('Tabs')->tabs([
-    Tabs\Tab::make('LW')->components([
-        Livewire::make(DemoComponent::class),
-    ]),
-])
+    ]);
+}
 ```
 </div>
 </div>
@@ -920,10 +955,12 @@ Tabs::make('Tabs')->tabs([
 </Docs>
 
 <!--
+## Flexibility
+- This gives full flexibilty
 - No need to publish Blade files anymore
 - Use anything that can be rendered
 
-- This gives full flexibilty
+## Reuse
 - Reuse Filament defined via methods: Forms, Actions, Relation Managers, ...
 -->
 
@@ -1019,17 +1056,53 @@ fn (
 </Docs>
 
 <!--
-- Integrate any API into Filament easily
-- Maybe even Filament API packages in the future?
-- You can use Actions to create/edit/view records from the API
+## Use Case
+- Static Data (JSON, ...)
+- API
 
-TODO: Do Summarizers work?
+## Features
+- All table features
+- Custom Actions
+
+
+## Todo
+- TODO: Do Summarizers work?
+- TODO: How to use Actions?
 -->
 ---
-layout: intro
+layout: full
 ---
 
 # 👨🏼‍💻 Nested Resources
+
+#### Relation Manager
+<div style="max-width: 30rem">
+```php
+class MeetupsRelationManager extends RelationManager
+{
+  protected static $relatedResource = MeetupResource::class;
+}
+```
+
+#### Nested Resource
+
+```php
+class MeetupResource extends Resource
+{
+    protected static $parentResource = LocationResource::class;
+}
+```
+</div>
+
+<div v-click>
+<Demo
+    page="locations"
+    :contained="false"
+    class="absolute top-0 right-0 bottom-0 width-full"
+    width="450px"
+    height="550px"
+/>
+</div>
 
 <Docs
   href="https://filamentphp.com/docs/4.x/resources/nesting"
@@ -1037,28 +1110,24 @@ layout: intro
 >
   Nested Resources
 </Docs>
+
 <!--
-- RelationManagers were limited to 1 level so far
-- No you can nest as deep as you want
-- Filament makes it easy to generate the code
+## Before
+- RM limited to 1 level
+
+## Now
+- Nest as deep as you want
+- Easy to generate
 -->
 
 ---
-layout: full
----
 
-# DEMO: Nested Resources
-
----
-
-## 🔐 2FA
+# 🔐 2FA
 
 Choose between Authenticator App or Email
 
 <div class="w-2/3">
 <div v-click>
-
-<!-- #### Configure Your Panel -->
 
 ```php
 $panel
@@ -1101,18 +1170,18 @@ interface HasAppAuthentication
 >
     Multi-Factor Authentication
 </Docs>
+
 <!--
+## Current
 - So far 2FA through Breezy
+
+## New
+- Baked in 2FA
 - Profile needed for 2FA management
 - Add migration and implement interface on User model
 
+## ...
 - Optional or required (will redirect after login)
-```php
-->multiFactorAuthentication([
-    AppAuthentication::make(),
-], isRequired: true);
-```
-
 - Only 1 authenticator possible
 -->
 
@@ -1122,6 +1191,10 @@ layout: section
 
 # ✨<br>New Components
 
+<!--
+# 💧
+## Quick Walkthrough
+-->
 
 ---
 layout: center
@@ -1165,7 +1238,8 @@ class: text-center
     Forms: Slider
 </Docs>
 <!--
-noUI Slider under the hood
+- 2 Modes: Single or Range
+- noUI Slider under the hood
 -->
 
 ---
@@ -1186,7 +1260,12 @@ class: text-center
 </Docs>
 
 <!--
-Code Editor powered by Codemirror
+## Facts
+- Codemirror
+- Supports 12 Languages
+- One Theme: One Dark
+
+## Support
 Supports: C++, CSS, Go, HTML, Java, Javascript, JSON, Markdown, PHP, Python, XML, YAML
 Theme: One Dark
 -->
@@ -1209,7 +1288,7 @@ class: text-center
 </Docs>
 
 <!--
-Code Entry powered by Phiki (Ryans Shiki port)
+Phiki (Ryans Shiki port)
 - Fast rendering
 - Lots of Grammars
 - Beautiful Themes
@@ -1233,8 +1312,9 @@ class: text-center
 </Docs>
 
 <!--
-- Inspired by Adams Table Repeater
-- Slightly different syntax (headers => table)
+- Adams Table Repeater
+- No separate component
+- Just configure `->table()`
 - Reordering, deleting, adding
 - Not a separate component
 -->
@@ -1263,7 +1343,9 @@ class: text-center
 
 
 <!--
-- Record Finder
+## Use Case
+- Similar to Select
+- But more options (pagination, filtering, ...)
 -->
 
 ---
@@ -1289,16 +1371,18 @@ class: text-center
 </Docs>
 
 <!--
+- Replaced Trix (Good but simple)
 - Based on TipTap
-- Replaced Trix by Basecamp
 
+## Features
 - Store as JSON or HTML
-
 - Custom Blocks
 - Merge Tags
 - Private Files
 -->
 
+---
+layout: default
 ---
 
 # ✨ What else?
@@ -1310,30 +1394,6 @@ class: text-center
 - New file structure
 - Better Documentation
 - ...
-
-<!--
-- A11Y: Colors and Headline structure
-- Sidebar: Can be refreshed via Events
-
-- File structure
-```
-+-- Customers
-|   +-- CustomerResource.php
-|   +-- Pages
-|   |   +-- CreateCustomer.php
-|   |   +-- EditCustomer.php
-|   |   +-- ListCustomers.php
-|   +-- Schemas
-|   |   +-- CustomerForm.php
-|   +-- Tables
-|   |   +-- CustomersTable.php
-```
-
-- Docs
-  - More explanations
-  - Better Navigation
-  - More Screenshots
--->
 
 ---
 layout: intro
@@ -1349,22 +1409,32 @@ layout: intro
 layout: intro
 ---
 
-# 🫶🏼 How you can help
+# 🕵🏼‍♂️ How you can help
 
 - Test the beta
 - Report issues on GitHub
 - Spread the word
 - Sponsor the project
 
-<!-- <div class="flex gap-2 justify-center text-sm absolute bottom-8 left-[50%] translate-x-[-50%]"> -->
 <div class="flex gap-2 justify-center text-sm bottom-8 left-14 absolute">
     <lucide-github class="size-5 translate-y-1" />
     <a class="inline-block mt-0.5" href="https://github.com/sponsors/danharrin">https://github.com/sponsors/danharrin</a>
 </div>
+
+<!--
+## Sponsor
+- You or Employer
+-->
 
 ---
 layout: center
 class: text-center
 ---
 
-# Thank you
+# <b><em>Thank you!</em></b>
+
+Questions?
+
+<!--
+# 💧
+-->
