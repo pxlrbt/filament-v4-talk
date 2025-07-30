@@ -1431,9 +1431,21 @@ layout: center
 class: text-center
 ---
 
-# <b><em>Thank you!</em></b>
+<div class="w-full grid grid-cols-2 gap-32 items-center">
+  <div class="text-center">
 
-Questions?
+  # <b><em>Thank you!</em></b>
+  Questions?
+
+  </div>
+  <div>
+      <h3 class="mb-4 font-medium">Slides</h3>
+      <figure class="w-full flex flex-col items-center">
+          <img src="./assets/qr.png" class="size-32" alt="">
+          <figcaption class="mt-4 text-sm">denniskoch.dev<em>/talks/filament-v4</em></figcaption>
+      </figure>
+  </div>
+</div>
 
 <!--
 # 💧

@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "slidev -f",
-    "build": "slidev build --base /talks/filament-v4",
+    "build": "slidev build  --range=\"3-40\" --dark --base /talks/filament-v4",
     "dev": "slidev -f",
     "export": "slidev export"
   },
