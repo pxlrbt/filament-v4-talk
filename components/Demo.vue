@@ -29,7 +29,7 @@ const props = defineProps({
 >
   <div :style="{'width': props.width, 'height': props.height}">
     <iframe
-      :src="'http://filament-talk-demo.test/demo/'+props.page"
+      :src="'https://filament-v4-demo.denniskoch.dev/demo/'+props.page"
       class="max-w-full overflow-hidden"
 
       :style="{'width': props.width, 'height': props.height}"
