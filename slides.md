@@ -1,43 +1,17 @@
 ---
-# theme: seriph
 theme: default
 title: What's new in Filament v4
-#   Learn more at [Sli.dev](https://sli.dev)
-# apply unocss classes to the current slides
-# https://sli.dev/features/drawing
 drawings:
   persist: false
-# slide transition: https://sli.dev/guide/animations.html#slide-transitions
+routerMode: hash
 transition: fade
-# enable MDC Syntax: https://sli.dev/features/mdc
 mdc: true
-layout: intro
----
-
-# Preparation
-- ⚠️ TEST: Do Examples work?
-- 💧 Prepare some water
-- 🧘🏼 Focus: Do not disturb
-- 🕵🏼 Arc: Filament Talk Space
-- 📈 Start presentation & <em>Screen Mirror Mode & Whole Window</em>
-- 💻 Make both full screen (Toggle with F)
-- 👨🏼‍💻 Open Demo Code in PhpStorm
-
----
-
-
----
 layout: statement
 class: text-center
 ---
 
 # 🚀<br>What's new in<br><em>Filament v4</em>
 
-<!--
-Today I'm talking about all the great stuff you can expect with Filament v4.
-
-Try to demonstrate that with code samples and demos.
--->
 
 ---
 layout: intro
@@ -63,17 +37,6 @@ layout: intro
 </div>
 
 <img src="./assets/me.jpg" class="absolute size-64 top-16 right-16   rounded-3xl" />
-
-<!--
-## Me
-- Still quite new here.
-- Freiburg across the border – Thanks for meetup asylum
-- Filament: Mostly support on Discord
-
-## Social
-- pxlrbt: No so smart short version of German company name
-- Learned from that => Real name on mastodon
--->
 
 ---
 layout: intro
@@ -112,27 +75,6 @@ public static function table(Table $table): Table
 </div>
 </div>
 
-<!--
-# 💧
-## Intro
-- We had 1 or 2 Filament talks already
-- Anyone doesn't know what Filament is?
-- Anyone that hasn't used Filament yet?
-- Let's just pretend
-
-## Recap
--  Livewire is what makes it great and flexible
--  SDUI: Isn't that what PHP is? Maybe call it Server-configured UI
-
-## Team
-- Dan: Mostly Coding
-- Rest: Support & Help, Administration, Design, Marketing
-
-## Recent Talks
-- Stefan gave a talk 3 months ago.
-- Christoph & Luc: 8 months ago.
--->
-
 ---
 layout: section
 ---
@@ -141,11 +83,6 @@ layout: section
 
 Performance | DX | New Components
 
-<!--
-- Tried to categorise
-
-This time no new Livewire version, let's see how long this lasts. Tonight Laracon.
--->
 
 ---
 layout: section
@@ -154,17 +91,6 @@ layout: section
 # 🚀<br>Performance
 
 Rendering | Partials | JS Methods
-
-<!--
-## Livewire
-- Based on Livewire
-- We trade a bit of performance for DX
-
-## Old State
-- Performance wasn't that bad
-- But bad compared to simple Livewire apps and Frontend Frameworks
-- Especially big tables and forms
--->
 
 ---
 
@@ -212,36 +138,6 @@ public function toEmbeddedHtml(): string
 </v-clicks>
 </div>
 
-<!--
-- Ed asked how we handled this in Stefan's talk.
-- Rendering takes longest (unless you create fancy DB queries)
-- Always thought size of HTML was biggest issue.
-
-[click]
-## TW
-- Replace inline TW with `fi-` classes
-- Use Tailwinds `@apply`
-- Use Tailwinds CSS Vars
-
-[click]
-## Blade
-- Heavily use Blade components
-- Components were the biggest bottleneck.
-- Now: Render via PHP
-
-## Compare
-100 rows table with 7 columns
-
-- Before 3872 views
-- After 122 views
-
-[click]
-- `view()` takes about 20x longer to render than plain PHP
-Every column was a Blade component.
-- 7 columns * 100 row => 700 columns
-- More with Badges, Icons, ...
-
--->
 
 ---
 layout: center
@@ -269,10 +165,6 @@ em {
 }
 </style>
 
-<!--
-- Big improvements all over the board.
-- The bigger the better
--->
 ---
 
 # 🚀 Partials
@@ -363,55 +255,6 @@ Livewire gives us **flexibility** — but also **limits performance**.
     }
 </style>
 
-<!--
-# 💧
-
-[click]
-## One Component
-- Whole Page (containing Table/Form)
-- Performance gets worse the bigger it gets
-
-## Separate components
-- Communication between needed
-- More complexity
-
-[click:4]
-## Solution: Partials
-- Render single components/views
-- Reduce transferred HTML size
-- Morph DOM
-
-[click]
-## How it works
-- `afterStateUpdated()` => Which components to render?
-- Register Partial Rendering for component (Partials are extracted into single views)
-- Mark request as `skipRender` so Livewire doesn't do a full render
-- Add partials as `effect`
-- JS: Find `wire:partials` and morph DOM with new HTML
-
-- Hooks into Lifecycle => Skips render
-
-- Automatically used for
-  - Action Modals
-  - Tables Filter Form
-  - Every Form/Infolist component
-
-## Improvements
-- Less Rendering
-- Less HTML passed over the wire
-- Less morphing
-
-## Files
-- HasState::callAfterStateUpdated()
-- PartialsComponentHook (Livewire uses "Hooks" for all Features)
-
-## Livewire Payload:
-- memo: Used to create the component
-- state: Stores the current state
-- calls: Methods to call with their params
-- updates: Which properties to update
--->
-
 ---
 
 # 🚀 Partial Render Self
@@ -451,12 +294,6 @@ Forms\Components\TextInput::make('password')
 >
   Field Partial Rendering
 </Docs>
-
-<!--
-# 💧
-
-- Maybe your password rules are more complex – I hope they are not
--->
 
 ---
 
@@ -516,9 +353,6 @@ layout: section
 
 No server loop required.
 
-<!--
-- We don't want to write a lot of JS, but if it's just some simple one-liners, why not?
--->
 ---
 
 # Show/Hide via JavaScript
@@ -548,10 +382,7 @@ Forms\Components\DatePicker::make('published_at')
 Hiding an entry using JavaScript
 </Docs>
 
-<!--
-- Show additional fields based on some condition
-- More useful if you show/hide a big section of fields
--->
+
 ---
 
 # Update Fields via JavaScript
@@ -585,11 +416,6 @@ Forms\Components\TextInput::make('slug')
 Preventing the Livewire component from rendering after a field is updated
 </Docs>
 
-<!--
-- Type: What's new in Filament v4?
-- Livewire version was laggy and might drop characters
--->
-
 ---
 
 # Output Content via JavaScript
@@ -618,39 +444,6 @@ Forms\Components\TextInput::make('name')
   Using JavaScript to determine text content
 </Docs>
 
-
-<!--
-- Example: Char Counter
-- Works with all methods that accept `Htmlable`.
-
-Renders: `<span x-text="() => eval({$content})"></span>`
-
-```js
-window.Alpine.data(
-    'filamentSchemaComponent',
-    ({ path, containerPath, isLive, $wire }) => ({
-        $statePath: path,
-        $get: (path, isAbsolute) => {
-            return $wire.$get(
-                resolveRelativeStatePath(containerPath, path, isAbsolute),
-            )
-        },
-        $set: (path, state, isAbsolute, isUpdateLive = null) => {
-            isUpdateLive ??= isLive
-
-            return $wire.$set(
-                resolveRelativeStatePath(containerPath, path, isAbsolute),
-                state,
-                isUpdateLive,
-            )
-        },
-        get $state() {
-            return $wire.$get(path)
-        },
-    }),
-)
-```
--->
 
 ---
 
@@ -740,15 +533,6 @@ BulkAction::make()
   Improving the performance of bulk actions
 </Docs>
 
-
-<!--
-Load sets of records instead of all at once
-
-[click]
-
-Just get the IDs. Useful if you want to bulk update via DB anyway
--->
-
 ---
 layout: section
 ---
@@ -756,10 +540,6 @@ layout: section
 # 👨🏼‍💻 <br> Developer Experience
 
 Unified Actions | Schemas | Static Tables
-
-<!--
-# 💧
--->
 
 ---
 
@@ -790,14 +570,6 @@ One class to rule them all.
 </div>
 </v-clicks>
 </Grid>
-
-<!--
-- Less duplicate code
-- Only `Actions` or `BulkActios`
-- No more bad namespace imports (`Tables/Action`, `Pages/Action`, `Components/Action`)
-- Reuse them in Tables, Forms, Infolist, ...
-- Use them in multiple places: Header Actions, Toolbar (Bulk Actions),
--->
 
 ---
 
@@ -842,13 +614,6 @@ public function form(Schema $schema): Schema
 >
   Schemas
 </Docs>
-
-<!--
-- Started with Tables & Forms
-- v3: Infolists
-- v4: Combined => Schemas
-- Placeholder/View not needed that much anymore
--->
 
 ---
 layout: full
@@ -954,16 +719,6 @@ public function content(Schema $schema) {
   Schemas
 </Docs>
 
-<!--
-## Flexibility
-- This gives full flexibilty
-- No need to publish Blade files anymore
-- Use anything that can be rendered
-
-## Reuse
-- Reuse Filament defined via methods: Forms, Actions, Relation Managers, ...
--->
-
 ---
 
 # 👨🏼‍💻 Static Tables
@@ -988,16 +743,6 @@ class SubscriptionApiWrapper extends Model
 
 </Grid>
 
-<!--
-Highly requested.
-Example: Integrating 3rd Party APIs
-So far: Sushi
-
-[click]
-
-Sushi was meant for static data. Not paginated APIs
-Filtering, searching, relationships, ... not possible.
--->
 ---
 layout: full
 ---
@@ -1055,20 +800,6 @@ fn (
   Tables: Custom Data
 </Docs>
 
-<!--
-## Use Case
-- Static Data (JSON, ...)
-- API
-
-## Features
-- All table features
-- Custom Actions
-
-
-## Todo
-- TODO: Do Summarizers work?
-- TODO: How to use Actions?
--->
 ---
 layout: full
 ---
@@ -1110,15 +841,6 @@ class MeetupResource extends Resource
 >
   Nested Resources
 </Docs>
-
-<!--
-## Before
-- RM limited to 1 level
-
-## Now
-- Nest as deep as you want
-- Easy to generate
--->
 
 ---
 
@@ -1171,30 +893,11 @@ interface HasAppAuthentication
     Multi-Factor Authentication
 </Docs>
 
-<!--
-## Current
-- So far 2FA through Breezy
-
-## New
-- Baked in 2FA
-- Profile needed for 2FA management
-- Add migration and implement interface on User model
-
-## ...
-- Optional or required (will redirect after login)
-- Only 1 authenticator possible
--->
-
 ---
 layout: section
 ---
 
 # ✨<br>New Components
-
-<!--
-# 💧
-## Quick Walkthrough
--->
 
 ---
 layout: center
@@ -1237,10 +940,6 @@ class: text-center
 >
     Forms: Slider
 </Docs>
-<!--
-- 2 Modes: Single or Range
-- noUI Slider under the hood
--->
 
 ---
 layout: center
@@ -1259,17 +958,6 @@ class: text-center
     Forms: Code Editor
 </Docs>
 
-<!--
-## Facts
-- Codemirror
-- Supports 12 Languages
-- One Theme: One Dark
-
-## Support
-Supports: C++, CSS, Go, HTML, Java, Javascript, JSON, Markdown, PHP, Python, XML, YAML
-Theme: One Dark
--->
-
 ---
 layout: center
 class: text-center
@@ -1287,13 +975,6 @@ class: text-center
     Infolists: Code Entry
 </Docs>
 
-<!--
-Phiki (Ryans Shiki port)
-- Fast rendering
-- Lots of Grammars
-- Beautiful Themes
--->
-
 ---
 layout: center
 class: text-center
@@ -1310,14 +991,6 @@ class: text-center
 >
     Forms: Table Repeaters
 </Docs>
-
-<!--
-- Adams Table Repeater
-- No separate component
-- Just configure `->table()`
-- Reordering, deleting, adding
-- Not a separate component
--->
 
 ---
 layout: center
@@ -1341,13 +1014,6 @@ class: text-center
     Forms: Selecting options from a table in a modal
 </Docs>
 
-
-<!--
-## Use Case
-- Similar to Select
-- But more options (pagination, filtering, ...)
--->
-
 ---
 layout: center
 class: text-center
@@ -1369,17 +1035,6 @@ class: text-center
 >
     Forms: Rich Editor
 </Docs>
-
-<!--
-- Replaced Trix (Good but simple)
-- Based on TipTap
-
-## Features
-- Store as JSON or HTML
-- Custom Blocks
-- Merge Tags
-- Private Files
--->
 
 ---
 layout: default
@@ -1421,11 +1076,6 @@ layout: intro
     <a class="inline-block mt-0.5" href="https://github.com/sponsors/danharrin">https://github.com/sponsors/danharrin</a>
 </div>
 
-<!--
-## Sponsor
-- You or Employer
--->
-
 ---
 layout: center
 class: text-center
@@ -1446,7 +1096,3 @@ class: text-center
       </figure>
   </div>
 </div>
-
-<!--
-# 💧
--->
