@@ -12,6 +12,8 @@ class: text-center
 
 # 🚀<br>What's new in<br><em>Filament v4</em>
 
+<span class="opacity-40 text-xs">Dennis Koch | Laravel Switzerland Meetup | 30th July 2025</span>
+
 
 ---
 layout: intro
